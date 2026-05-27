@@ -1,0 +1,34 @@
+---
+const channels = [
+  { label: 'Telegram', value: '@taras_v', href: 'https://t.me/taras_v' },
+  { label: 'Email', value: 'photo@taras.rocks', href: 'mailto:photo@taras.rocks' },
+  { label: 'Domain', value: 'taras.rocks' },
+];
+---
+
+<section id="contact" class="relative px-6 py-28 sm:px-10 sm:py-36 lg:px-16">
+  <div class="mx-auto max-w-3xl">
+    <h2 class="label mb-10 text-[var(--color-text)]">Contact</h2>
+    <dl class="divide-y divide-[var(--color-line)] border-y border-[var(--color-line)]">
+      {
+        channels.map((c) => (
+          <div class="grid grid-cols-[8rem_1fr] items-baseline gap-6 py-6 sm:grid-cols-[10rem_1fr]">
+            <dt class="label text-[var(--color-mute)]">{c.label}</dt>
+            <dd
+              class="font-[var(--font-display)] text-xl tracking-tight text-[var(--color-text)] sm:text-2xl"
+              style="font-weight: 300;"
+            >
+              {c.href ? (
+                <a href={c.href} class="link-accent" rel="noreferrer">
+                  {c.value}
+                </a>
+              ) : (
+                c.value
+              )}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>

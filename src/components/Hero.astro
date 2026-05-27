@@ -1,0 +1,53 @@
+---
+import { heroPhoto } from '../data/photos';
+import Nav from './Nav.astro';
+---
+
+<header
+  id="top"
+  class="relative isolate flex h-svh min-h-[640px] w-full flex-col overflow-hidden"
+>
+  {
+    heroPhoto && (
+      <>
+        <img
+          src={heroPhoto.src}
+          alt={heroPhoto.alt}
+          width={heroPhoto.width}
+          height={heroPhoto.height}
+          fetchpriority="high"
+          loading="eager"
+          decoding="async"
+          class="absolute inset-0 -z-10 h-full w-full object-cover"
+        />
+        <div
+          aria-hidden="true"
+          class="absolute inset-0 -z-10"
+          style="background: linear-gradient(180deg, rgba(11,11,12,.35) 0%, rgba(11,11,12,.55) 55%, rgba(11,11,12,.95) 100%);"
+        />
+      </>
+    )
+  }
+
+  <Nav />
+
+  <div
+    class="relative z-10 flex h-full flex-col justify-end px-6 pb-20 sm:px-10 sm:pb-24 lg:px-16 lg:pb-28"
+  >
+    <p class="label mb-6 text-[var(--color-mute)]">Tbilisi · 41.7°N 44.8°E</p>
+    <h1
+      class="font-[var(--font-display)] font-light leading-[0.95] tracking-[-0.02em] text-[var(--color-text)]"
+      style="font-size: clamp(3rem, 9vw, 6.5rem);"
+    >
+      Taras Volchenko
+    </h1>
+    <p
+      class="mt-6 max-w-xl text-base leading-relaxed text-[var(--color-text)]/85 sm:text-lg"
+    >
+      Urban &amp; photographer in Tbilisi.
+    </p>
+    <p class="mt-2 max-w-xl text-sm leading-relaxed text-[var(--color-mute)] sm:text-base">
+      Developer · visual systems · street photography.
+    </p>
+  </div>
+</header>

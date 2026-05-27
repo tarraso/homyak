@@ -1,0 +1,28 @@
+---
+const links = [
+  { href: '#photography', label: 'Photography' },
+  { href: '#code', label: 'Code' },
+  { href: '#about', label: 'About' },
+  { href: '#contact', label: 'Contact' },
+];
+---
+
+<nav
+  aria-label="Primary"
+  class="absolute inset-x-0 top-0 z-30 flex items-center justify-between px-6 py-6 sm:px-10 sm:py-8"
+>
+  <a href="#top" class="label tracking-[0.2em] text-[var(--color-text)]">
+    Taras&nbsp;Volchenko
+  </a>
+  <ul class="hidden gap-8 sm:flex">
+    {
+      links.map((l) => (
+        <li>
+          <a href={l.href} class="label link-accent text-[var(--color-mute)]">
+            {l.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

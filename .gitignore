@@ -1,0 +1,34 @@
+# build
+dist/
+.astro/
+
+# deps
+node_modules/
+
+# env
+.env
+.env.production
+.env.local
+.env.*.local
+
+# editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# misc
+.cache/
+*.tsbuildinfo
+
+# local agent state
+.claude/
+
+# photo originals — heavy (RAW-derived JPEGs). Keep them outside git;
+# back up separately (Lightroom catalog, cloud, etc). Only the compressed
+# versions in public/photos/ ship to users.
+photos-source/

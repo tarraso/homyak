@@ -1,0 +1,92 @@
+---
+import { gridPhotos } from '../data/photos';
+---
+
+<section id="photography" class="relative px-6 py-28 sm:px-10 sm:py-36 lg:px-16">
+  <header class="mx-auto mb-16 max-w-6xl sm:mb-20">
+    <h2 class="label text-[var(--color-text)]">Photography</h2>
+  </header>
+
+  <ul
+    class="mx-auto max-w-6xl columns-1 gap-6 sm:columns-2 sm:gap-8 lg:columns-3 lg:gap-10"
+  >
+    {
+      gridPhotos.map((photo, i) => (
+        <li class="mb-6 break-inside-avoid sm:mb-8 lg:mb-10">
+          <figure>
+            <button
+              type="button"
+              class="group block w-full cursor-zoom-in border-0 bg-transparent p-0 text-left"
+              data-lightbox-trigger
+              data-src={photo.src}
+              data-alt={photo.alt}
+              data-width={photo.width}
+              data-height={photo.height}
+              aria-label={`View larger: ${photo.alt}`}
+            >
+              <img
+                src={photo.src}
+                alt={photo.alt}
+                width={photo.width}
+                height={photo.height}
+                loading={i < 3 ? 'eager' : 'lazy'}
+                decoding="async"
+                class="block h-auto w-full bg-[var(--color-surface)] opacity-95 transition-opacity duration-300 group-hover:opacity-100"
+              />
+            </button>
+            {(photo.place || photo.year) && (
+              <figcaption class="label mt-3 text-[var(--color-mute)]">
+                {[photo.place, photo.year].filter(Boolean).join(' · ')}
+              </figcaption>
+            )}
+          </figure>
+        </li>
+      ))
+    }
+  </ul>
+
+  <dialog
+    id="lightbox"
+    class="m-0 h-full max-h-none w-full max-w-none bg-[rgba(11,11,12,0.96)] p-0 backdrop:bg-[rgba(11,11,12,0.96)]"
+  >
+    <div class="relative flex h-full w-full items-center justify-center p-4 sm:p-10">
+      <button
+        type="button"
+        data-lightbox-close
+        aria-label="Close"
+        class="label absolute right-4 top-4 z-10 cursor-pointer border border-[var(--color-line)] bg-[var(--color-surface)] px-3 py-2 text-[var(--color-text)] sm:right-8 sm:top-8"
+      >
+        Close ✕
+      </button>
+      <img
+        id="lightbox-img"
+        src=""
+        alt=""
+        class="block max-h-full max-w-full object-contain"
+      />
+    </div>
+  </dialog>
+</section>
+
+<script>
+  const dialog = document.getElementById('lightbox') as HTMLDialogElement | null;
+  const img = document.getElementById('lightbox-img') as HTMLImageElement | null;
+  if (dialog && img) {
+    document.querySelectorAll<HTMLButtonElement>('[data-lightbox-trigger]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        img.src = btn.dataset.src ?? '';
+        img.alt = btn.dataset.alt ?? '';
+        img.width = Number(btn.dataset.width ?? 0);
+        img.height = Number(btn.dataset.height ?? 0);
+        dialog.showModal();
+      });
+    });
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.querySelector('[data-lightbox-close]')?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('close', () => {
+      img.src = '';
+    });
+  }
+</script>
