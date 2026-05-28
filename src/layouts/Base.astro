@@ -1,30 +1,30 @@
 ---
 import '../styles/global.css';
+import { getStrings, type Locale } from '../i18n';
 
 interface Props {
-  title?: string;
-  description?: string;
+  locale: Locale;
   ogImage?: string;
 }
 
-const {
-  title = 'Taras Volchenko — photographer & developer in Tbilisi',
-  description = 'Taras Volchenko: urban photographer based in Tbilisi, and a developer working on realtime systems and visual experiments. Cinematic street and night photography.',
-  ogImage = '/og.jpg',
-} = Astro.props;
+const { locale, ogImage = '/og.jpg' } = Astro.props;
+const t = getStrings(locale);
 
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const enUrl = new URL('/', Astro.site).toString();
+const ruUrl = new URL('/ru/', Astro.site).toString();
 const ogImageUrl = new URL(ogImage, Astro.site).toString();
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Taras Volchenko',
+  name: t.name,
+  alternateName: locale === 'ru' ? 'Taras Volchenko' : 'Тарас Волченко',
   url: 'https://taras.rocks',
-  jobTitle: 'Photographer & Software Developer',
+  jobTitle: t.meta.jobTitle,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Tbilisi',
+    addressLocality: t.meta.city,
     addressCountry: 'GE',
   },
   sameAs: [
@@ -36,36 +36,44 @@ const jsonLd = {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={t.htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0b0b0c" />
     <meta name="color-scheme" content="dark" />
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
     <link rel="canonical" href={canonical} />
+
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="ru" href={ruUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title="" href="/sitemap-index.xml" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImageUrl} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={t.ogLocale} />
+    <meta
+      property="og:locale:alternate"
+      content={locale === 'en' ? 'ru_RU' : 'en_US'}
+    />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:title" content={t.meta.title} />
+    <meta name="twitter:description" content={t.meta.description} />
     <meta name="twitter:image" content={ogImageUrl} />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
-    <a href="#main" class="skip-link">Skip to content</a>
+    <a href="#main" class="skip-link">{t.meta.skipLink}</a>
     <slot />
   </body>
 </html>

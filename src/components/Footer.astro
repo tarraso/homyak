@@ -1,4 +1,12 @@
 ---
+import { getStrings, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getStrings(locale);
 const year = new Date().getFullYear();
 ---
 
@@ -6,7 +14,7 @@ const year = new Date().getFullYear();
   <div
     class="mx-auto flex max-w-6xl items-center justify-between border-t border-[var(--color-line)] pt-8"
   >
-    <p class="label text-[var(--color-mute)]">© {year} Taras Volchenko · Tbilisi</p>
+    <p class="label text-[var(--color-mute)]">© {year} {t.name} · {t.footer.city}</p>
     <p class="label text-[var(--color-mute)]">taras.rocks</p>
   </div>
 </footer>

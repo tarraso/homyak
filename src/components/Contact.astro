@@ -1,14 +1,23 @@
 ---
+import { getStrings, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getStrings(locale);
+
 const channels = [
-  { label: 'Telegram', value: '@taras_v', href: 'https://t.me/taras_v' },
-  { label: 'Email', value: 'photo@taras.rocks', href: 'mailto:photo@taras.rocks' },
-  { label: 'Domain', value: 'taras.rocks' },
+  { label: t.contact.telegram, value: '@taras_v', href: 'https://t.me/taras_v' },
+  { label: t.contact.email, value: 'photo@taras.rocks', href: 'mailto:photo@taras.rocks' },
+  { label: t.contact.domain, value: 'taras.rocks' },
 ];
 ---
 
 <section id="contact" class="relative px-6 py-28 sm:px-10 sm:py-36 lg:px-16">
   <div class="mx-auto max-w-3xl">
-    <h2 class="label mb-10 text-[var(--color-text)]">Contact</h2>
+    <h2 class="label mb-10 text-[var(--color-text)]">{t.contact.heading}</h2>
     <dl class="divide-y divide-[var(--color-line)] border-y border-[var(--color-line)]">
       {
         channels.map((c) => (

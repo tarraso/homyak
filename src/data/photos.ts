@@ -7,6 +7,8 @@ export type Photo = {
    * Replace each one with a real one-line description.
    */
   alt: string;
+  /** Optional Russian alt. Falls back to `alt` if absent. */
+  altRu?: string;
   width: number;
   height: number;
   place?: string;
@@ -29,7 +31,7 @@ export const photos: Photo[] = [
   { src: '/photos/dsc-0412.jpg', alt: 'Photograph by Taras Volchenko', width: 2400, height: 1607 },
   { src: '/photos/dsc-0998.jpg', alt: 'Photograph by Taras Volchenko', width: 1600, height: 2400 },
   { src: '/photos/dsc-2453.jpg', alt: 'Photograph by Taras Volchenko', width: 1600, height: 2400 },
-  { src: '/photos/dsc-0926.jpg', alt: 'Photograph by Taras Volchenko', width: 2400, height: 1600 },
+  { src: '/photos/dsc-0926.jpg', alt: 'Photograph by Taras Volchenko', width: 2400, height: 1600, hero: true },
   { src: '/photos/pxl-20260508-150435753-raw-02-original.jpg', alt: 'Photograph by Taras Volchenko, May 2026', width: 1805, height: 2400, year: 2026 },
   { src: '/photos/dsc-1033.jpg', alt: 'Photograph by Taras Volchenko', width: 2400, height: 1600 },
   { src: '/photos/pxl-20260505-152229917-raw-02-original.jpg', alt: 'Photograph by Taras Volchenko, May 2026', width: 2400, height: 2400, year: 2026 },

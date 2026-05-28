@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import PhotoGrid from '../../components/PhotoGrid.astro';
+import About from '../../components/About.astro';
+import Code from '../../components/Code.astro';
+import Contact from '../../components/Contact.astro';
+import Footer from '../../components/Footer.astro';
+
+const locale = 'ru' as const;
+---
+
+<Base locale={locale}>
+  <Hero locale={locale} />
+  <main id="main">
+    <PhotoGrid locale={locale} />
+    <About locale={locale} />
+    <Code locale={locale} />
+    <Contact locale={locale} />
+  </main>
+  <Footer locale={locale} />
+</Base>
