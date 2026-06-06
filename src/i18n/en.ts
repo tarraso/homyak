@@ -23,7 +23,7 @@ export const en = {
 
   hero: {
     placeLabel: 'Tbilisi · 41.7°N 44.8°E',
-    subtitle1: 'Urban & photographer in Tbilisi.',
+    subtitle1: 'Urban photographer in Tbilisi.',
     subtitle2: 'Developer · visual systems · street photography.',
   },
 
